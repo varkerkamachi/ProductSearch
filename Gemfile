@@ -17,6 +17,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'slim'
 gem 'uglifier', '>= 1.3.0'
+gem 'bootstrap-sass'
 
 # JavaScript
 gem 'coffee-rails', '~> 4.2'
@@ -35,6 +36,7 @@ gem 'semantics3'
 gem 'annotate', group: :development
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13.0'
   gem 'selenium-webdriver'
