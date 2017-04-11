@@ -1,0 +1,23 @@
+.container
+  .pull-right
+    =link_to 'product search', product_search_index_path
+  - if @cache_results.blank?
+    h3
+      | There are no cached results yet
+  - else
+    table.table.table-striped
+      thead
+        tr
+          th 
+            | Search Key
+          th
+            | Results
+          th
+            | Searched On
+          th
+            | Remove from cache
+
+      tbody
+        - @cache_results.each do |item|
+        	=render partial: 'item', locals: { item: item }
+              

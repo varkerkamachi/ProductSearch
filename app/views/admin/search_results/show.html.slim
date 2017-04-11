@@ -1,0 +1,30 @@
+.container
+  .pull-right
+    =link_to 'back to cache list', admin_search_results_path
+  - if @cache_result.blank?
+    h3
+      | There are no cached results matching this record
+  - else
+    table.table.table-striped
+      thead
+        tr
+          th 
+            | Search Key
+          th
+            | Results
+          th
+            | Searched On
+          th
+            | Remove from cache
+
+      tbody
+		tr
+		  td
+		    = SearchKey.find( @cache_result.search_key_id ).try(:key)
+		  td width= '65%'
+		    = JSON.pretty_generate(JSON.parse(@cache_result.results['results'].to_json))
+		  td
+		    = Time.parse(@cache_result.updated_at.to_s).strftime('%Y-%m-%d, %H:%M:%S') 
+		  td
+		    = link_to 'delete', admin_search_result_path(@cache_result), method: :delete, data: { confirm: 'Confirming you want to delete this cache result?' }
+              
