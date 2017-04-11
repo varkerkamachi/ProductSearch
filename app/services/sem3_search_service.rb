@@ -1,4 +1,5 @@
 class Sem3SearchService
+  include SearchCache
   attr_reader :params
 
   def initialize(params)
@@ -9,6 +10,9 @@ class Sem3SearchService
     setup
     construct_query
     get_products
+    if @params[:cache]
+      cache_results
+    end
   end
 
   private
@@ -24,5 +28,11 @@ class Sem3SearchService
 
   def get_products
     @sem3.get_products
+  end
+
+  def cache_results
+    @key = SearchCache.cache_key params[:search]
+    # Rails.logger.info "key: #{@key.inspect} -----------------"
+    SearchCache.cache_results @key, @sem3.get_products
   end
 end
